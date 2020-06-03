@@ -58,7 +58,7 @@ public class Service1Application {
 
                     Flux<String> stringFlux = httpClient
                             .get()
-                            .uri("http://localhost:8081/hello-again/SpringFans")
+                            .uri("http://localhost:8090/hello-again/SpringFans")
                             .retrieve()
                             .bodyToFlux(String.class);
 

@@ -50,7 +50,7 @@ public class Service1Application {
             WebClient httpClient) {
         return route()
                 .GET("/reservations", r -> {
-                    var data = rr.findAll() ;
+                    var data = rr.findAll();
                     return ServerResponse.ok().body(data, Reservation.class);
                 })
                 .GET("/hello", r -> {
@@ -59,6 +59,18 @@ public class Service1Application {
                     Flux<String> stringFlux = httpClient
                             .get()
                             .uri("http://localhost:8090/hello-again/SpringFans")
+                            .retrieve()
+                            .bodyToFlux(String.class);
+
+                    return ServerResponse.ok().body(stringFlux, String.class);
+                })
+
+                .GET("/hello/{name}", r -> {
+                    this.counter.increment();
+                    String name = r.pathVariable("name");
+                    Flux<String> stringFlux = httpClient
+                            .get()
+                            .uri("http://localhost:8090/hello-again/{name}", name)
                             .retrieve()
                             .bodyToFlux(String.class);
 
@@ -75,7 +87,6 @@ public class Service1Application {
 }
 
 interface ReservationRepository extends ReactiveCrudRepository<Reservation, Integer> {
-
 }
 
 @Data

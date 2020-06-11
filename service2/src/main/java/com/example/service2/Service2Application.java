@@ -40,5 +40,4 @@ class AnotherGreetingsRestController {
         return Collections.singletonMap("greeting", stringMessage);
     }
 
-
 }

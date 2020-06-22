@@ -43,7 +43,7 @@ public class PaymentsApplication {
                                                  Source customerSatisfactionService) {
 
         Counter register = Counter
-                .builder("payments")
+                .builder("payments.received")
                 .tag("region", "us-west")
                 .register(this.meterRegistry);
 

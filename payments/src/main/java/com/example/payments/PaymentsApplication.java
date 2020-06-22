@@ -62,11 +62,13 @@ public class PaymentsApplication {
                     String payload = json(Collections.singletonMap("orderId", orderId));
                     customerSatisfactionService.output().send(MessageBuilder.withPayload(payload).build());
 
+
                     if (Math.random() >= .9) {
                         return ServerResponse.badRequest().build();
                     } else {
                         return ServerResponse.ok().body(httpRequest, String.class);
                     }
+
                 })
                 .build();
     }

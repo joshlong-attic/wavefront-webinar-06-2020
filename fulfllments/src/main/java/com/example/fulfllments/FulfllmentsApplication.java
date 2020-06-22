@@ -16,6 +16,11 @@ public class FulfllmentsApplication {
     RouterFunction<ServerResponse> http() {
         return route()
                 .GET("/fulfillment/{fid}", r -> {
+                    try {
+                        Thread.sleep( (long)(Math.random() * 10000L));
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                     System.out.println("order-id: " + r.pathVariable("fid"));
                     return ServerResponse.ok().bodyValue(true);
                 })

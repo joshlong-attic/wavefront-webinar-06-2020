@@ -43,7 +43,7 @@ public class PaymentsApplication {
                                                  Source customerSatisfactionService) {
 
         Counter register = Counter
-                .builder("payments")
+                .builder("payments.received")
                 .tag("region", "us-west")
                 .register(this.meterRegistry);
 
@@ -59,11 +59,14 @@ public class PaymentsApplication {
                             .retrieve()
                             .bodyToFlux(String.class);
 
-
                     String payload = json(Collections.singletonMap("orderId", orderId));
                     customerSatisfactionService.output().send(MessageBuilder.withPayload(payload).build());
 
-                    return ServerResponse.ok().body(httpRequest, String.class);
+                    if (Math.random() >= .9) {
+                        return ServerResponse.badRequest().build();
+                    } else {
+                        return ServerResponse.ok().body(httpRequest, String.class);
+                    }
                 })
                 .build();
     }

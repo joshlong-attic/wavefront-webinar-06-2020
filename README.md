@@ -6,7 +6,7 @@ The hypothetical flow is:
 
 ```
 `api-gateway` ->(HTTP)-> (
-    `payments` -> (Kafka)-> `inventory`   
-    `payments` -> (HTTP)-> `customer-service`
+    `payments` -> (Kafka)-> `fulfillment`   
+    `payments` -> (HTTP)-> `customer-satisfaction`
     )
   ```
